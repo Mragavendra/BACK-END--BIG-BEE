@@ -8,6 +8,15 @@ import leadTypeRoutes from "./routes/leadType.routes.js";
 import designationRoutes from './routes/designation.routes.js';
 import departmentRoutes from './routes/department.routes.js';
 import leadSourceRoutes from './routes/leadSource.routes.js';
+import categoryRoutes from "./routes/category.routes.js";
+import actionRoutes from "./routes/action.routes.js";
+import statusRoutes from "./routes/status.routes.js";
+import followupModeRoutes from "./routes/followupMode.routes.js";
+import companyRoutes from "./routes/company.routes.js";
+import serviceRoutes from "./routes/service.routes.js";
+import campaignTypeRoutes from "./routes/campaignType.routes.js";
+import typeOfAdvertisingRoutes from "./routes/typeOfAdvertising.routes.js";
+import marketingChannelRoutes from "./routes/marketingChannel.routes.js";
 
 
 dotenv.config();
@@ -31,6 +40,16 @@ app.use("/api/lead-types", leadTypeRoutes);
 app.use('/api/designations', designationRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/lead-sources', leadSourceRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/actions", actionRoutes);
+app.use("/api/status", statusRoutes);
+app.use("/api/followup-modes", followupModeRoutes);
+app.use("/api/company", companyRoutes);
+app.use("/api/services", serviceRoutes);
+app.use("/api/campaign-types", campaignTypeRoutes);
+app.use("/api/type-of-advertising", typeOfAdvertisingRoutes);
+app.use("/api/marketing-channels", marketingChannelRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
