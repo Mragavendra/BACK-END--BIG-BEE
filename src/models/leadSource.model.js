@@ -1,35 +1,66 @@
-// src/models/leadSource.model.js
 import { DataTypes } from 'sequelize';
 import { sequelize } from "../config/sequelize.js";
 
-const LeadSource = sequelize.define(
-  'LeadSource',
+const Employee = sequelize.define(
+  'Employee',
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING(255),
+    employee_id: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       unique: true,
     },
-    type: {
-      type: DataTypes.ENUM(
-        'website',
-        'referral',
-        'social_media',
-        'email_campaign',
-        'event',
-        'cold_call',
-        'advertisement',
-        'partner'
-      ),
+    full_name: {
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
-    description: {
-      type: DataTypes.TEXT,
+    email: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    mobile_number: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    address_line1: {
+      type: DataTypes.STRING(255),
+    },
+    landmark: {
+      type: DataTypes.STRING(255),
+    },
+    street: {
+      type: DataTypes.STRING(255),
+    },
+    state: {
+      type: DataTypes.STRING(100),
+    },
+    city: {
+      type: DataTypes.STRING(100),
+    },
+    pincode: {
+      type: DataTypes.STRING(20),
+    },
+    department: {
+      type: DataTypes.ENUM('Sales', 'Marketing', 'HR', 'Finance', 'IT'),
+      allowNull: false,
+    },
+    designation: {
+      type: DataTypes.ENUM('Intern', 'Junior', 'Senior', 'Manager', 'Director'),
+      allowNull: false,
+    },
+    reports_to: {
+      type: DataTypes.ENUM('John Doe', 'Jane Smith', 'Robert Brown', 'Alice Johnson', 'Michael Lee'),
+      allowNull: false,
+    },
+    date_of_joining: {
+      type: DataTypes.DATEONLY,
+    },
+    notes: {
+      type: DataTypes.ENUM('Note 1', 'Note 2', 'Note 3', 'Note 4', 'Note 5'),
     },
     is_active: {
       type: DataTypes.BOOLEAN,
@@ -37,11 +68,11 @@ const LeadSource = sequelize.define(
     },
   },
   {
-    tableName: 'lead_sources',
+    tableName: 'employees',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
   }
 );
 
-export default LeadSource;
+export default Employee;
