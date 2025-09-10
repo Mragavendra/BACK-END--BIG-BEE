@@ -19,6 +19,10 @@ import typeOfAdvertisingRoutes from "./routes/typeOfAdvertising.routes.js";
 import marketingChannelRoutes from "./routes/marketingChannel.routes.js";
 import employeeRoutes from './routes/employee.routes.js';
 import leadRoutes from "./routes/lead.routes.js";
+import funnelTrackerRoutes from "./routes/funnelTrackerRoutes.js";
+import orderRoutes from "./routes/order.routes.js";
+import performanceRoutes from "./routes/performanceMis.routes.js";
+
 
 
 dotenv.config();
@@ -53,6 +57,9 @@ app.use("/api/type-of-advertising", typeOfAdvertisingRoutes);
 app.use("/api/marketing-channels", marketingChannelRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use("/api/leads", leadRoutes);
+app.use("/api/funnel-tracker", funnelTrackerRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/performance", performanceRoutes);
 
 
 const PORT = process.env.PORT || 5000;
