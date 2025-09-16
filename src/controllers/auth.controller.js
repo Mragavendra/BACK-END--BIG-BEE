@@ -47,12 +47,36 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // sign token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    // Determine role based on email
+    let role = 'marketing'; // default role
+    
+    if (email === 'admin@gmail.com') {
+      role = 'admin';
+    } else if (email === 'marketingteam@gmail.com') {
+      role = 'marketing';
+    }
+    // Add more email-based roles as needed
 
-    res.json({ message: "Login successful", token });
+    // sign token
+    const token = jwt.sign(
+      { 
+        id: user.id, 
+        role: role,
+        email: email
+      }, 
+      process.env.JWT_SECRET, 
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    // Send role back in response
+    res.json({ 
+      message: "Login successful", 
+      token: token,
+      role: role,
+      email: email
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

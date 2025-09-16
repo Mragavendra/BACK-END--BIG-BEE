@@ -49,7 +49,6 @@ export const updateEmployee = async (req, res) => {
     res.status(500).json({ message: 'Failed to update employee', error });
   }
 };
-
 // DELETE Employee
 export const deleteEmployee = async (req, res) => {
   try {

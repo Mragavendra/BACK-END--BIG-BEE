@@ -41,6 +41,7 @@ export const getCampaignTypeById = async (req, res) => {
   }
 };
 
+
 // Update Campaign Type
 export const updateCampaignType = async (req, res) => {
   try {
