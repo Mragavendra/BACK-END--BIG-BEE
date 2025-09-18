@@ -7,16 +7,16 @@ export const register = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // check if user exists
+    // Check if user exists
     const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
     if (rows.length > 0) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // hash password
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // insert new user
+    // Insert new user
     await pool.query("INSERT INTO users (email, password) VALUES (?, ?)", [
       email,
       hashedPassword,
@@ -33,7 +33,7 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // check user
+    // Check user
     const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
     if (rows.length === 0) {
       return res.status(400).json({ message: "Invalid credentials" });
@@ -41,23 +41,24 @@ export const login = async (req, res) => {
 
     const user = rows[0];
 
-    // compare password
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
     // Determine role based on email
-    let role = 'marketing'; // default role
-    
+    let role = 'marketing'; // Default role
     if (email === 'admin@gmail.com') {
       role = 'admin';
     } else if (email === 'marketingteam@gmail.com') {
       role = 'marketing';
+    } else if (email === 'businessanddevelopmentteam@gmail.com') {
+      role = 'business_development';
     }
     // Add more email-based roles as needed
 
-    // sign token
+    // Sign token
     const token = jwt.sign(
       { 
         id: user.id, 
